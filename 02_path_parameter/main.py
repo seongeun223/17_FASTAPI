@@ -16,3 +16,33 @@ async def read_item(item_id):
 @app.get('/items/type/{item_id}')
 async def read_item_type(item_id: int):
     return {"item_id" : item_id}
+
+# Enum으로 매개변수 받기
+from enum import Enum
+
+class Teachers(str, Enum):
+    bear = '곰'
+    gorilla = '고릴라'
+    pig = '돼지'
+    
+@app.get('/teacher/{teacher_name}')
+async def get_teacher(teacher_name: Teachers):
+    
+    if teacher_name is Teachers.bear:
+        return {'우리반 선생님은 곰입니다.'}
+    elif teacher_name is Teachers.gorilla:
+        return {'우리반 선생님은 고릴라입니다.'}
+    
+    return {'우리반 선생님은 돼지입니다.'}
+
+# fastapi 작성 시 주의할 사항
+# 순서 문제
+
+@app.get('users/me')
+async def read_me():
+    return {'user_id': 'user_me'}
+
+@app.get('users/{user_id}')
+async def read_user(user_id: str):
+    return {'user_id': user_id}
+
