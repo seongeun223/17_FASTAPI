@@ -56,3 +56,15 @@ def update_teacher(db:Session, teacher_id:int, teacher:schemas.TeacherUpdate):
     db.commit()
     
     return found_teacher
+
+# teacher 삭제하기
+def delete_teacher(db:Session, teacher_id:int):
+    
+    found_teacher = db.query(models.Teacher).filter(models.Teacher.id == teacher_id).first()
+    
+    if found_teacher is None:
+        raise HTTPException(status_code=404, detail="Teacher not Found")
+    
+    db.delete(found_teacher)
+    
+    db.commit()

@@ -14,3 +14,13 @@ class Teacher(Base):
     nickname = Column(String(50))
     is_active = Column(Boolean, default=True)
     description = Column(Text)
+    
+class Student(Base):
+    __tablename__ = 'students'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50))
+    nickname = Column(String(50))
+    lunch_menu = Column(String(100))
+    description = Column(Text)
+    
+# 관계 설정이 가능 =>
